@@ -1,0 +1,132 @@
+<div>
+    <div ng-controller="ideasListController" ng-class="{content_loading: loading}" ng-if="['list'].indexOf(currentView) >= 0">
+        <div class="box box-solid">            
+            <div class="box-header with-border form-inline">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="box-title">{{listTitle}}</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <form class="inline pull-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..." ng-model="searchBy">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-flat btn-default" ng-click="search();"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <div class="input-group">                                
+                                <v18-categories></v18-categories>
+                            </div>
+                        </form>                        
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div ng-if="!list.length">
+                    <h3 class="text-center">No Users to be shown</h3>
+                </div>
+                <table ng-if="list.length" class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>                            
+                            <th>Submitted On</th>
+                            <th>Category</th>
+                            <th>Submitter</th>                            
+                            <th>Status</th>                            
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="post in filterList()">
+                            <td>{{post['name']}}</td>
+                            <td>{{post.submittedOn * 1000| date}}</td>
+                            <td>{{post['category']}}</td>
+                            <td><a href="submitters/profile" target="new">{{post['submitterName']}}</a></td>
+                            <td>{{post['status']}}</td>
+                            <td><a href="#ideas/idea" ng-click="showPostDetails(post)"><i class="fa fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+            <div class="box-footer text-center">
+                <cnv-pagination page="paginator.page" pages="paginator.total" onchange="paginator.change()"></cnv-pagination>                
+            </div>
+        </div>
+    </div>
+
+    <div ng-controller="ideasUserController" ng-if="['details'].indexOf(currentView) >= 0">
+        <div class="box box-widget">
+            <div class="box-header with-border">
+                <div class="user-block">
+                    <img class="img-circle" src="/res/images/logo.png" alt="User Image" kasperskylab_antibanner="on">
+                    <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
+                    <span class="description">Submitted - 7:30 PM Today</span>
+                </div>
+                <!-- /.user-block -->                
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- post text -->
+                <p>Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at</p>
+
+                <p>the coast of the Semantics, a large language ocean.
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into
+                    your mouth.</p>
+                <!-- /.attachment-block -->
+
+                <!-- Social sharing buttons -->
+                <span class="badge bg-orange">Under Review</span>
+                <span class="pull-right text-muted">45 likes - 2 comments</span>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer box-comments">
+                <div class="box-comment">
+                    <!-- User image -->
+                    <img class="img-circle img-sm" src="/res/images/logo.png" alt="User Image" kasperskylab_antibanner="on">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Maria Gonzales
+                            <span class="text-muted pull-right">8:03 PM Today</span>
+                        </span><!-- /.username -->
+                        It is a long established fact that a reader will be distracted
+                        by the readable content of a page when looking at its layout.
+                    </div>
+                    <!-- /.comment-text -->
+                </div>
+                <!-- /.box-comment -->
+                <div class="box-comment">
+                    <!-- User image -->
+                    <img class="img-circle img-sm" src="/res/images/logo.png" alt="User Image" kasperskylab_antibanner="on">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Nora Havisham
+                            <span class="text-muted pull-right">8:03 PM Today</span>
+                        </span><!-- /.username -->
+                        The point of using Lorem Ipsum is that it has a more-or-less
+                        normal distribution of letters, as opposed to using
+                        'Content here, content here', making it look like readable English.
+                    </div>
+                    <!-- /.comment-text -->
+                </div>
+                <!-- /.box-comment -->
+            </div>
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                <form action="#" method="post">
+                    <img class="img-responsive img-circle img-sm" src="/res/images/logo.png" alt="Alt Text" kasperskylab_antibanner="on">
+                    <!-- .img-push is used to add margin to elements next to floating images -->
+                    <div class="img-push">
+                        <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+    </div>
+</div>

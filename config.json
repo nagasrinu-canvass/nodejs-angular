@@ -1,0 +1,17 @@
+{
+    "local": {
+        "mongodb": {
+            "url": "mongodb://localhost/dbname"
+        }
+    },
+    "development": {
+        "mongodb": {
+            "url": "mongodb://localhost/dbname"
+        }
+    },
+    "production": {
+        "mongodb": {
+            "url": "mongodb://localhost/dbname"
+        }
+    }
+}

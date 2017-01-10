@@ -1,0 +1,82 @@
+<div>
+    <div ng-controller="submittersListController" ng-class="{content_loading: loading}" ng-if="['list'].indexOf(currentView) >= 0">
+        <div class="box box-solid">            
+            <div class="box-header with-border form-inline">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="box-title">{{listTitle}}</h3>
+                    </div>                                    
+                    <div class="col-md-8">
+                        <form class="inline pull-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..." ng-model="searchBy">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-flat btn-default" ng-click="search();"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div ng-if="!list.length">
+                    <h3 class="text-center">No Users to be shown</h3>
+                </div>
+                <table ng-if="list.length" class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>                            
+                            <th>Email</th>
+                            <th>Mobile</th>                            
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in filterList()">
+                            <td>{{user['name']}}</td>                            
+                            <td>{{user['email']}}</td>
+                            <td>{{user['mobile']}}</td>
+                            <td><a href="#submitters/profile"><i class="fa fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+            <div class="box-footer text-center">
+                <cnv-pagination page="paginator.page" pages="paginator.total" onchange="paginator.change()"></cnv-pagination>                
+            </div>
+        </div>
+    </div>
+
+    <div ng-controller="submittersUserController" ng-if="['create', 'update'].indexOf(currentView) >= 0">
+        <div class="box box-solid">
+            <form ng-submit="saveUser();">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" class="form-control" ng-model="user.name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" ng-model="user.email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile</label>
+                        <input type="text" class="form-control" ng-model="user.mobile" />
+                    </div>                    
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select 
+                            ng-options="item as item.label for item in roles track by item.id"
+                            ng-model="user.role" 
+                            class="form-control">                                
+                        </select>                        
+                    </div>                        
+                </div>
+                <div class="box-footer text-right">                        
+                    <button class="btn btn-default" ng-click="setView('list')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>                
+        </div>
+    </div>
+</div>
